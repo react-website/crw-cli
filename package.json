@@ -1,0 +1,46 @@
+{
+  "name": "crw-cli",
+  "version": "1.0.0",
+  "private": false,
+  "workspaces": [
+    "packages/*"
+  ],
+  "bin": {
+    "crw": "./bin/www"
+  },
+  "description": "create react website cli.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/create-react-website/crw-cli.git"
+  },
+  "keywords": [
+    "website",
+    "cli"
+  ],
+  "author": "qq2575896094",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/create-react-website/crw-cli/issues"
+  },
+  "homepage": "https://github.com/create-react-website/crw-cli#readme",
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "lerna": "^5.1.6"
+  },
+  "dependencies": {
+    "axios": "^1.5.1",
+    "chalk": "^4.1.2",
+    "commander": "^10.0.1",
+    "figlet": "^1.7.0",
+    "fs-extra": "^11.1.1",
+    "inquirer": "^8.2.5",
+    "ora": "^5.4.1",
+    "semver": "^7.5.4"
+  }
+}
