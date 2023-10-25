@@ -1,8 +1,8 @@
-const { checkCrwVersion, compareVersion } = require('utils/checkVersion')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 const path = require('path')
 const fs = require('fs-extra')
+const { checkCrwVersion, compareVersion } = require('../utils/checkVersion')
 const packageJson = require('../package.json')
 /**
  * 1. 检测crw版本是否是最新的
