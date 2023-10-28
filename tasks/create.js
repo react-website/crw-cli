@@ -3,8 +3,14 @@ const inquirer = require('inquirer')
 const path = require('path')
 const fs = require('fs-extra')
 const spawn = require('cross-spawn')
+const ora = require('ora')
 const { checkCrwVersion, compareVersion } = require('../utils/checkVersion')
-const { writeJson, copyTemplate } = require('../utils/writeFile')
+const {
+    writeJson,
+    copyTemplate,
+    hasTemplateJson,
+    mergePackageJson,
+} = require('../utils/writeFile')
 const packageJson = require('../package.json')
 /**
  * 1. 检测crw版本是否是最新的
@@ -13,13 +19,38 @@ const packageJson = require('../package.json')
  * 4. 拷贝模版到该文件夹中
  */
 
-const install = async (appPath, template = 'crw-template') => {
-    const allDependencies = ['react', 'react-dom', template]
+const install = async ({
+    appPath,
+    packageJsonPath,
+    template = 'crw-template',
+}) => {
+    const allDependencies = [template, 'crw-scripts']
     const command = 'npm'
-    const args = ['install', '--save'].concat(allDependencies)
-    spawn.sync(command, args, { stdio: 'inherit' })
+    const args = ['install']
+
+    let spinner = ora('正在拉取项目模版...').start()
+    console.log()
+    let res = spawn.sync(command, args.concat('--save', allDependencies))
+    if (res.error)spinner.fail('拉取项目模版失败.')
+    spinner.succeed()
+
     // 拷贝模版
     copyTemplate(template, appPath)
+
+    // 判断模版是否存在template.json文件
+    const templateJsonPath = path.join(appPath, 'template.json')
+    if (hasTemplateJson(templateJsonPath)) {
+        mergePackageJson(packageJsonPath, templateJsonPath)
+        fs.removeSync(templateJsonPath)
+    }
+    // 删除模版
+    spawn.sync(command, ['uninstall', template])
+
+    // 下载依赖
+    spinner = ora('正在下载项目依赖, 等待中...').start()
+    res = spawn.sync(command, args, { stdio: 'inherit' })
+    if (res.error)spinner.fail('下载项目依赖失败.')
+    spinner.succeed()
 }
 
 const createApp = async (name) => {
@@ -32,8 +63,8 @@ const createApp = async (name) => {
     })
 
     // 当前根目录
-    const rootPath = path.resolve(name)
-    if (fs.pathExistsSync(rootPath)) {
+    const appPath = path.resolve(name)
+    if (fs.pathExistsSync(appPath)) {
         const { exist } = await inquirer.prompt({
             type: 'confirm',
             name: 'exist',
@@ -45,17 +76,18 @@ const createApp = async (name) => {
         fs.removeSync(name)
     }
 
-    fs.mkdirp(name)
-    writeJson(path.join(rootPath, 'package.json'), {
-        name,
-        version: '0.1.0',
-        private: true,
-    })
+    fs.mkdirpSync(name)
 
-    process.chdir(rootPath)
+    const packageJsonPath = path.join(appPath, 'package.json')
+    writeJson(packageJsonPath, { name, version: '0.1.0', private: true })
+
+    process.chdir(appPath)
 
     // 安装软件
-    await install(rootPath)
+    await install({
+        appPath,
+        packageJsonPath,
+    })
 }
 
 /**
