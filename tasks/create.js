@@ -30,7 +30,7 @@ const install = async ({
 
     let spinner = ora('正在拉取项目模版...').start()
     console.log()
-    let res = spawn.sync(command, args.concat('--save', allDependencies))
+    let res = spawn.sync(command, args.concat('--save-dev', allDependencies))
     if (res.error)spinner.fail('拉取项目模版失败.')
     spinner.succeed()
 

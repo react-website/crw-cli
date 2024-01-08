@@ -24,10 +24,29 @@ const copyTemplate = (templateName, appPath) => {
 const hasTemplateJson = (filePath) => fs.pathExistsSync(filePath)
 
 const mergePackageJson = (packageJsonPath, templateJsonPath) => {
-    const packageJson = fs.readJsonSync(packageJsonPath)
-    const templateJson = fs.readJsonSync(templateJsonPath)
+    const {
+        devDependencies = {},
+        dependencies = {},
+        ...otherPackageJson
+    } = fs.readJsonSync(packageJsonPath)
+    const {
+        tempDevDependencies = {},
+        tempDependencies = {},
+        ...tempOtherPackageJson
+    } = fs.readJsonSync(templateJsonPath)
 
-    writeJson(packageJsonPath, { ...templateJson, ...packageJson })
+    writeJson(packageJsonPath, {
+        ...tempOtherPackageJson,
+        ...otherPackageJson,
+        devDependencies: {
+            ...tempDevDependencies,
+            ...devDependencies,
+        },
+        dependencies: {
+            ...tempDependencies,
+            ...dependencies,
+        },
+    })
 }
 
 module.exports = {
