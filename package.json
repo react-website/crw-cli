@@ -1,6 +1,6 @@
 {
   "name": "crw-cli",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": false,
   "workspaces": [
     "packages/*"
@@ -11,6 +11,7 @@
   "description": "create react website cli.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js create myweb",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

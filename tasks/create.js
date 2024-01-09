@@ -28,10 +28,10 @@ const install = async ({
     const command = 'npm'
     const args = ['install']
 
-    let spinner = ora('正在拉取项目模版...').start()
+    let spinner = ora('正在拉取项目模版, 创建项目开发环境...').start()
     console.log()
-    let res = spawn.sync(command, args.concat('--save-dev', allDependencies))
-    if (res.error)spinner.fail('拉取项目模版失败.')
+    let res = spawn.sync(command, args.concat('--save-dev', allDependencies), { stdio: 'inherit' })
+    if (res.error) spinner.fail('拉取项目模版, 创建项目开发环境失败.')
     spinner.succeed()
 
     // 拷贝模版
@@ -43,14 +43,15 @@ const install = async ({
         mergePackageJson(packageJsonPath, templateJsonPath)
         fs.removeSync(templateJsonPath)
     }
-    // 删除模版
-    spawn.sync(command, ['uninstall', template])
 
     // 下载依赖
-    spinner = ora('正在下载项目依赖, 等待中...').start()
+    spinner = ora('正在下载项目依赖...').start()
     res = spawn.sync(command, args, { stdio: 'inherit' })
     if (res.error)spinner.fail('下载项目依赖失败.')
     spinner.succeed()
+
+    // 删除模版
+    spawn.sync(command, ['uninstall', template])
 }
 
 const createApp = async (name) => {

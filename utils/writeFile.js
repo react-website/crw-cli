@@ -30,8 +30,8 @@ const mergePackageJson = (packageJsonPath, templateJsonPath) => {
         ...otherPackageJson
     } = fs.readJsonSync(packageJsonPath)
     const {
-        tempDevDependencies = {},
-        tempDependencies = {},
+        devDependencies: tempDevDependencies = {},
+        dependencies: tempDependencies = {},
         ...tempOtherPackageJson
     } = fs.readJsonSync(templateJsonPath)
 
