@@ -46,6 +46,7 @@ const install = async ({
 
     // 下载依赖
     spinner = ora('正在下载项目依赖...').start()
+    console.log()
     res = spawn.sync(command, args, { stdio: 'inherit' })
     if (res.error)spinner.fail('下载项目依赖失败.')
     spinner.succeed()
