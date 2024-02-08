@@ -1,30 +1,24 @@
-const chalk = require('chalk')
-const inquirer = require('inquirer')
-const path = require('path')
-const fs = require('fs-extra')
-const spawn = require('cross-spawn')
-const ora = require('ora')
-const { checkCrwVersion, compareVersion } = require('../utils/checkVersion')
-const {
+import chalk from 'chalk'
+import inquirer from 'inquirer'
+import * as path from 'path'
+import fs from 'fs-extra'
+import { spawn } from 'cross-spawn'
+import ora from 'ora'
+import {
+    compareVersion,
+    getVersion,
     writeJson,
     copyTemplate,
     hasTemplateJson,
     mergePackageJson,
-} = require('../utils/writeFile')
-const packageJson = require('../package.json')
-/**
- * 1. 检测crw版本是否是最新的
- * 2. 选择模版语言
- * 3. 判断是否存在该文件夹
- * 4. 拷贝模版到该文件夹中
- */
+} from 'crw-utils'
 
 const install = async ({
     appPath,
     packageJsonPath,
-    template = 'crw-template',
+    template = 'create-react-website1-template',
 }) => {
-    const allDependencies = [template, 'crw-scripts']
+    const allDependencies = [template, 'create-react-website1-scripts']
     const command = 'npm'
     const args = ['install']
 
@@ -95,13 +89,16 @@ const createApp = async (name) => {
 /**
  * 入口文件
  * @param name 项目名称
+ * @param version
  * @returns {Promise<void>}
  */
-module.exports = async (name) => {
-    const latest = await checkCrwVersion()
+export default async (name, version) => {
+    const latest = await getVersion()
 
-    if (compareVersion(latest, packageJson.version)) {
-        console.error(chalk.yellow(`You are running crw-cli ${packageJson.version}.\ncrw-cli latest release ${latest}.\nPlease update crw-cli version.`))
+    if (compareVersion(latest, version)) {
+        console.warn(`You are running crw-cli ${chalk.yellow(version)}.`)
+        console.warn(`crw-cli latest release ${chalk.yellow(latest)}.`)
+        console.warn(chalk.yellow('Please update crw-cli version.'))
         return
     }
 

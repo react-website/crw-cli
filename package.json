@@ -1,6 +1,6 @@
 {
   "name": "@react-website/crw-cli",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "private": false,
   "workspaces": [
     "packages/*"
@@ -10,8 +10,8 @@
   },
   "description": "create react website cli.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js create myweb",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,17 +31,18 @@
   "devDependencies": {
     "eslint": "^8.41.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.5"
+    "eslint-plugin-import": "^2.27.5",
+    "lerna": "^8.1.2"
   },
   "dependencies": {
-    "axios": "^1.6.5",
-    "chalk": "^4.1.2",
-    "commander": "^10.0.1",
+    "axios": "^1.6.7",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
     "cross-spawn": "^7.0.3",
     "figlet": "^1.7.0",
-    "fs-extra": "^11.1.1",
-    "inquirer": "^8.2.5",
-    "ora": "^5.4.1",
-    "semver": "^7.5.4"
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.14",
+    "ora": "^8.0.1",
+    "semver": "^7.6.0"
   }
 }

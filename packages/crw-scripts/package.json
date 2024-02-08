@@ -1,0 +1,12 @@
+{
+  "name": "crw-scripts",
+  "version": "1.0.0",
+  "description": "react website scripts",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "qq2575896094",
+  "license": "MIT"
+}

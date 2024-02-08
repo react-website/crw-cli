@@ -1,8 +1,13 @@
-const fs = require('fs-extra')
-const os = require('os')
-const path = require('path')
+import fs from 'fs-extra'
+import os from 'os'
+import * as path from 'path'
 
-const writeJson = (filePath, data) => {
+/**
+ * 写文件
+ * @param filePath
+ * @param data
+ */
+export const writeJson = (filePath, data) => {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + os.EOL)
 }
 
@@ -11,7 +16,7 @@ const writeJson = (filePath, data) => {
  * @param templateName
  * @param appPath
  */
-const copyTemplate = (templateName, appPath) => {
+export const copyTemplate = (templateName, appPath) => {
     const templatePath = path.dirname(require.resolve(`${templateName}/package.json`, { paths: [appPath] }))
     fs.copySync(path.join(templatePath, 'template'), appPath)
 }
@@ -21,9 +26,14 @@ const copyTemplate = (templateName, appPath) => {
  * @param filePath
  * @returns {*}
  */
-const hasTemplateJson = (filePath) => fs.pathExistsSync(filePath)
+export const hasTemplateJson = (filePath) => fs.pathExistsSync(filePath)
 
-const mergePackageJson = (packageJsonPath, templateJsonPath) => {
+/**
+ * 合并package.json文件
+ * @param packageJsonPath
+ * @param templateJsonPath
+ */
+export const mergePackageJson = (packageJsonPath, templateJsonPath) => {
     const {
         devDependencies = {},
         dependencies = {},
@@ -47,11 +57,4 @@ const mergePackageJson = (packageJsonPath, templateJsonPath) => {
             ...dependencies,
         },
     })
-}
-
-module.exports = {
-    writeJson,
-    copyTemplate,
-    hasTemplateJson,
-    mergePackageJson,
 }

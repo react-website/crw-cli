@@ -1,7 +1,6 @@
 module.exports = {
     env: {
         node: true,
-        commonjs: true,
         es2021: true,
     },
     extends: ['eslint:recommended', 'airbnb-base'],
@@ -18,9 +17,11 @@ module.exports = {
         semi: ['error', 'never'],
         'no-extra-semi': 'error',
         indent: ['error', 4],
+        'import/extensions': 0,
         'import/no-extraneous-dependencies': 0,
         'no-unused-vars': 0,
         'global-require': 0,
         'import/no-dynamic-require': 0,
+
     },
 }
