@@ -12,5 +12,6 @@
     "directory": "packages/crw-scripts"
   },
   "author": "qq2575896094",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "87d133f3a025f475b9d7ae4754a54c5f2b23c706"
 }
