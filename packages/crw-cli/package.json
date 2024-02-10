@@ -1,0 +1,27 @@
+{
+  "name": "@react-website/crw-cli",
+  "version": "1.2.0",
+  "main": "index.js",
+  "bin": {
+    "crw": "bin/www"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-website/crw-cli.git",
+    "directory": "packages/crw-cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "author": "qq2575896094",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-website/crw-cli/issues"
+  },
+  "homepage": "https://github.com/react-website/crw-cli#readme",
+  "description": ""
+}

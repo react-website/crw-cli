@@ -1,5 +1,5 @@
 {
-  "name": "crw-utils",
+  "name": "@react-website/crw-utils",
   "version": "1.1.3",
   "description": "",
   "main": "index.js",
@@ -11,8 +11,11 @@
     "url": "git+https://github.com/react-website/crw-cli.git",
     "directory": "packages/crw-utils"
   },
-  "type": "module",
   "author": "qq2575896094",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "gitHead": "87d133f3a025f475b9d7ae4754a54c5f2b23c706"
 }

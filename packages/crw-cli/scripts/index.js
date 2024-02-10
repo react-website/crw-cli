@@ -4,16 +4,19 @@ import figlet from 'figlet'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { readJson } from 'crw-utils'
-import { create, generate } from './scripts/index.js'
+
+import create from './create.js'
+import generate from './generate.js'
 
 /**
  * init 入口方法
  */
 const init = () => {
-    const { name, version } = readJson(resolve(dirname(fileURLToPath(import.meta.url)), './package.json'))
+    const name = 'crw-cli'
+    const { version } = readJson(resolve(dirname(fileURLToPath(import.meta.url)), '../package.json'))
 
-    const program = new Command('crw-cli')
-        .alias(name)
+    const program = new Command(name)
+        .alias('crw')
         .version(version)
         .usage(`${chalk.green('<command> [options]')}`)
         .on('--help', () => {
