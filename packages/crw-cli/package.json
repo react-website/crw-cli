@@ -23,7 +23,7 @@
     "url": "https://github.com/react-website/crw-cli/issues"
   },
   "homepage": "https://github.com/react-website/crw-cli#readme",
-  "description": "",
+  "description": "react website project scaffold.",
   "dependencies": {
     "@react-website/crw-utils": "^1.2.2",
     "axios": "^1.6.7",
