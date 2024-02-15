@@ -20,7 +20,6 @@
     "scripts"
   ],
   "author": "qq2575896094",
-  "type": "module",
   "publishConfig": {
     "access": "public"
   },
