@@ -11,7 +11,7 @@ import {
     copyTemplate,
     hasTemplateJson,
     mergePackageJson,
-} from 'crw-utils'
+} from '@react-website/crw-utils'
 
 const install = async ({
     appPath,

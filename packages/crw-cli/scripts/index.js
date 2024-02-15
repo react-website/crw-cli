@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import figlet from 'figlet'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { readJson } from 'crw-utils'
+import { readJson } from '@react-website/crw-utils'
 
 import create from './create.js'
 import generate from './generate.js'
