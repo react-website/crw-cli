@@ -16,9 +16,9 @@ import {
 const install = async ({
     appPath,
     packageJsonPath,
-    template = 'create-react-website1-template',
+    template = '@react-website/crw-template',
 }) => {
-    const allDependencies = [template, 'create-react-website1-scripts']
+    const allDependencies = [template, '@react-website/crw-scripts']
     const command = 'npm'
     const args = ['install']
 
@@ -42,7 +42,7 @@ const install = async ({
     spinner = ora('正在下载项目依赖...').start()
     console.log()
     res = spawn.sync(command, args, { stdio: 'inherit' })
-    if (res.error)spinner.fail('下载项目依赖失败.')
+    if (res.error) spinner.fail('下载项目依赖失败.')
     spinner.succeed()
 
     // 删除模版

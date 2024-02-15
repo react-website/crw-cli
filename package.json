@@ -8,6 +8,7 @@
   "description": "create react website cli.",
   "type": "module",
   "scripts": {
+    "publish": "lerna publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

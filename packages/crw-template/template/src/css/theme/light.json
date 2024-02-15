@@ -1,0 +1,16 @@
+{
+  "token": {
+    "colorPrimary": "#1a8e5f",
+    "colorInfo": "#1a8e5f",
+    "colorTextBase": "#2e323c"
+  },
+  "components": {
+    "Button": {
+      "defaultActiveColor": "rgb(26, 142, 95)",
+      "defaultActiveBorderColor": "rgb(26, 142, 95)",
+      "defaultHoverBorderColor": "rgb(119, 181, 150)",
+      "defaultHoverColor": "rgb(119, 181, 150)",
+      "groupBorderColor": "rgb(119, 181, 150)"
+    }
+  }
+}

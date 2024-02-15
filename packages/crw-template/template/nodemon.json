@@ -1,0 +1,12 @@
+{
+  "delay" : 2500,
+  "ignore" : [
+    ".git",
+    "node_modules",
+    "src",
+    "dist",
+    "docs"
+  ],
+  "watch" : ["mock/test/**/*.js"],
+  "ext": "js json"
+}
