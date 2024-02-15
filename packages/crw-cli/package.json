@@ -1,6 +1,6 @@
 {
   "name": "@react-website/crw-cli",
-  "version": "1.0.1",
+  "version": "1.0.2-alpha.0",
   "main": "index.js",
   "bin": {
     "crw": "bin/www"
