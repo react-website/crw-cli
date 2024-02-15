@@ -1,4 +1,5 @@
 import fs from 'fs-extra'
+import { createRequire } from 'node:module'
 import os from 'os'
 import * as path from 'path'
 
@@ -16,8 +17,10 @@ export const writeJson = (filePath, data) => {
  * @param templateName
  * @param appPath
  */
-export const copyTemplate = (templateName, appPath) => {
-    const templatePath = path.dirname(require.resolve(`${templateName}/package.json`, { paths: [appPath] }))
+export const copyTemplate = async (templateName, appPath) => {
+    const requireFn = createRequire(import.meta.url)
+    const templatePath = path.dirname(requireFn.resolve(`${templateName}/package.json`, { paths: [appPath] }))
+
     fs.copySync(path.join(templatePath, 'template'), appPath)
 }
 

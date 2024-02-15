@@ -24,7 +24,7 @@ const install = async ({
 
     let spinner = ora('正在拉取项目模版, 创建项目开发环境...').start()
     console.log()
-    let res = spawn.sync(command, args.concat('--save-dev', allDependencies), { stdio: 'inherit' })
+    let res = await spawn.sync(command, args.concat('--save-dev', allDependencies), { stdio: 'inherit' })
     if (res.error) spinner.fail('拉取项目模版, 创建项目开发环境失败.')
     spinner.succeed()
 
@@ -41,12 +41,12 @@ const install = async ({
     // 下载依赖
     spinner = ora('正在下载项目依赖...').start()
     console.log()
-    res = spawn.sync(command, args, { stdio: 'inherit' })
+    res = await spawn.sync(command, args, { stdio: 'inherit' })
     if (res.error) spinner.fail('下载项目依赖失败.')
     spinner.succeed()
 
     // 删除模版
-    spawn.sync(command, ['uninstall', template])
+    await spawn.sync(command, ['uninstall', template])
 }
 
 const createApp = async (name) => {
@@ -88,11 +88,11 @@ const createApp = async (name) => {
 
 /**
  * 入口文件
- * @param name 项目名称
+ * @param projectName 项目名称
  * @param version
  * @returns {Promise<void>}
  */
-export default async (name, version) => {
+export default async (projectName, version) => {
     const latest = await getVersion()
 
     if (compareVersion(latest, version)) {
@@ -102,5 +102,5 @@ export default async (name, version) => {
         return
     }
 
-    await createApp(name)
+    await createApp(projectName)
 }

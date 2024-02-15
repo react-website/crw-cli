@@ -35,7 +35,7 @@ const init = () => {
     program.command('create')
         .arguments('<project-name>')
         .description(`welcome to create project templates using ${name}.`)
-        .action(() => create(name, version))
+        .action((projectName) => create(projectName, version))
 
     // gen command
     program.command('gen <project-name>')
