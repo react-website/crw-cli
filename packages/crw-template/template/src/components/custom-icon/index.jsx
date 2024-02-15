@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { createFromIconfontCN } from '@ant-design/icons'
-import comIcon from 'com-icon'
+import comIcon from '@react-website/com-icon'
 
 const CustomIcon = createFromIconfontCN({
     scriptUrl: [comIcon],
