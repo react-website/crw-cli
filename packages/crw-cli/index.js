@@ -8,7 +8,7 @@ import init from './scripts/index.js'
 const curNodeVersion = process.versions.node
 const semverVersion = curNodeVersion.split('.')
 
-if (semverVersion[0] < 14) {
+if (semverVersion[0] < 20) {
     console.error(
         `You are running Node${chalk.green(curNodeVersion)}.\n`
         + `Create React Web requires Node 14 or higher.\n${

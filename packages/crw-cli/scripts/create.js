@@ -58,6 +58,10 @@ const createApp = async (name) => {
         default: 'JavaScript',
     })
 
+    const template = language === 'TypeScript'
+        ? '@react-website/crw-template-typescript'
+        : '@react-website/crw-template'
+
     // 当前根目录
     const appPath = path.resolve(name)
     if (fs.pathExistsSync(appPath)) {
@@ -83,6 +87,7 @@ const createApp = async (name) => {
     await install({
         appPath,
         packageJsonPath,
+        template,
     })
 }
 
