@@ -35,5 +35,6 @@
     "inquirer": "^9.2.14",
     "ora": "^8.0.1",
     "semver": "^7.6.0"
-  }
+  },
+  "gitHead": "a80708afc80939e38e2d9ab798bcd65885dfc9e7"
 }
