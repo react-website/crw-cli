@@ -1,0 +1,11 @@
+{
+  "name": "@react-website/crw-template-typescript",
+  "version": "1.0.0",
+  "description": "This is a ts template.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "qq2575896094",
+  "license": "MIT"
+}
