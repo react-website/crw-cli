@@ -14,14 +14,16 @@ export const writeJson = (filePath, data) => {
 
 /**
  * 拷贝模版
- * @param templateName
+ * @param templateNames
  * @param appPath
  */
-export const copyTemplate = (templateName, appPath) => {
+export const copyTemplate = (templateNames, appPath) => {
     const requireFn = createRequire(import.meta.url)
-    const templatePath = path.dirname(requireFn.resolve(`${templateName}/package.json`, { paths: [appPath] }))
 
-    fs.copySync(path.join(templatePath, 'template'), appPath)
+    templateNames.forEach((templateName) => {
+        const templatePath = path.dirname(requireFn.resolve(`${templateName}/package.json`, { paths: [appPath] }))
+        fs.copySync(path.join(templatePath, 'template'), appPath)
+    })
 }
 
 /**

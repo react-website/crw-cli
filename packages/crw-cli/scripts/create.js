@@ -16,9 +16,9 @@ import {
 const install = async ({
     appPath,
     packageJsonPath,
-    template = '@react-website/crw-template',
+    template = [],
 }) => {
-    const allDependencies = [template, '@react-website/crw-scripts']
+    const allDependencies = [...template, '@react-website/crw-scripts']
     const command = 'npm'
     const args = ['install']
 
@@ -46,7 +46,7 @@ const install = async ({
     spinner.succeed()
 
     // 删除模版
-    await spawn.sync(command, ['uninstall', template])
+    await spawn.sync(command, ['uninstall', ...template])
 }
 
 const createApp = async (name) => {
@@ -59,8 +59,8 @@ const createApp = async (name) => {
     })
 
     const template = language === 'TypeScript'
-        ? '@react-website/crw-template-typescript'
-        : '@react-website/crw-template'
+        ? ['@react-website/crw-template-common', '@react-website/crw-template-typescript']
+        : ['@react-website/crw-template-common', '@react-website/crw-template']
 
     // 当前根目录
     const appPath = path.resolve(name)

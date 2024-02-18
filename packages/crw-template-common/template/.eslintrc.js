@@ -1,4 +1,4 @@
-const { alias = {} } = require('./crw.config')()
+const { alias = {} } = require('@react-website/crw-template/template/crw.config')()
 
 module.exports = {
     root: true,

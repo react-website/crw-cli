@@ -1,0 +1,12 @@
+{
+  "name": "@react-website/crw-template-common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "qq2575896094",
+  "license": "MIT"
+}
