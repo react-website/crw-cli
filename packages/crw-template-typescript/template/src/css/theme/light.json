@@ -1,0 +1,9 @@
+{
+  "token": {
+    "colorPrimary": "#1a8e5f",
+    "colorTextBase": "#2e323c",
+    "borderRadius": 4,
+    "layoutHeaderHeight": "48",
+    "headerBgColor": "#fff"
+  }
+}

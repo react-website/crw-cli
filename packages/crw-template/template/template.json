@@ -23,11 +23,11 @@
     "redux-logger": "^3.0.6"
   },
   "dependencies": {
+    "@react-website/com-icon": "^1.0.1",
     "@reduxjs/toolkit": "^2.0.1",
     "antd": "^5.12.8",
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
-    "@react-website/com-icon": "^1.0.1",
     "i18next": "^23.8.2",
     "path-to-regexp": "^6.2.1",
     "qs": "^6.11.2",

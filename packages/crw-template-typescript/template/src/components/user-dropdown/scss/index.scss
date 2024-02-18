@@ -1,0 +1,18 @@
+.user-dropdown-comp {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    line-height: 1.25rem;
+
+    :global {
+        .ant-dropdown-trigger {
+            display: flex;
+            align-items: center;
+            line-height: 2.55rem;
+
+            .username {
+                margin-right: 8px;
+            }
+        }
+    }
+}
