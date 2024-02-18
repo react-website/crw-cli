@@ -41,6 +41,9 @@ function RootView() {
             locale={antdLanguageData}
             theme={{
                 ...ThemeMap[appTheme],
+                algorithm: appTheme === 'dark'
+                        ? [theme.darkAlgorithm, theme.compactAlgorithm]
+                        : [theme.defaultAlgorithm, theme.compactAlgorithm],
                 cssVar: { prefix: 'crw' },
                 hashed: false
             }}

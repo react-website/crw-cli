@@ -5,13 +5,16 @@ import CustomIcon from '@components/custom-icon'
 
 import './scss/index.scss'
 
-const noop = () => {}
-
 function UserDropdown({
     username,
     avatar,
 }) {
     const menuItems = [
+        {
+            label: '系统设置',
+            key: 'system',
+            icon: <CustomIcon type="icon-icon13" />
+        },
         {
             label: '退出',
             key: 'logout',
@@ -31,13 +34,11 @@ function UserDropdown({
                     onClick: handleClick
                 }}
                 placement="bottomRight"
-                arrow
             >
                 <span>
                     <span className="username">{username}</span>
                     <Avatar
                         src={avatar}
-                        style={{ backgroundColor: '#87d068' }}
                         icon={<CustomIcon type="icon-dengluren" />}
                         alt={username}
                     />
