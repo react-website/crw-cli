@@ -1,6 +1,6 @@
 {
   "name": "@react-website/crw-template",
-  "version": "2.1.2-alpha.0",
+  "version": "2.1.3-alpha.0",
   "description": "",
   "main": "index.js",
   "scripts": {
