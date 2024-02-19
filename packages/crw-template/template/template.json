@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "create react website template.",
   "scripts": {
+    "precommit": "chmod ug+x .husky/*",
+    "prestart": "npm run precommit",
     "start": "crw-script start",
     "build": "crw-script build",
     "mock": "crw-script mock",
     "stylelint": "stylelint './src/**/index.scss' --fix",
+    "lint": "eslint --c .eslintrc.js --cache --fix",
+    "lintall": "npm run lint && npm run stylelint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

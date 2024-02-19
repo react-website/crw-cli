@@ -11,7 +11,7 @@ module.exports = {
             globalReturn: true,
         },
     },
-    extends: ['eslint:recommended', 'crw'],
+    extends: ['eslint:recommended', 'eslint-config-skyer'],
     rules: {},
     settings: {
         'import/resolver': {
