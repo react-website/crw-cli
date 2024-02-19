@@ -11,6 +11,9 @@
     "url": "git+https://github.com/react-website/crw-cli.git",
     "directory": "packages/crw-template-common"
   },
+  "files": [
+    "template"
+  ],
   "publishConfig": {
     "access": "public"
   },

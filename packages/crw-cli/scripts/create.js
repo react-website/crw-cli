@@ -24,7 +24,7 @@ const install = async ({
 
     let spinner = ora('正在拉取项目模版, 创建项目开发环境...').start()
     console.log()
-    let res = await spawn.sync(command, args.concat('--save-dev', allDependencies), { stdio: 'inherit' })
+    let res = await spawn.sync(command, args.concat('--save-dev', allDependencies))
     if (res.error) spinner.fail('拉取项目模版, 创建项目开发环境失败.')
     spinner.succeed()
 
@@ -41,9 +41,12 @@ const install = async ({
     // 下载依赖
     spinner = ora('正在下载项目依赖...').start()
     console.log()
-    res = await spawn.sync(command, args, { stdio: 'inherit' })
+    res = await spawn.sync(command, args)
     if (res.error) spinner.fail('下载项目依赖失败.')
     spinner.succeed()
+
+    // 重命名gitignore文件
+    fs.moveSync(`${appPath}/gitignore`, `${appPath}/.gitignore`)
 
     // 删除模版
     await spawn.sync(command, ['uninstall', ...template])
