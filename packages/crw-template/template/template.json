@@ -9,7 +9,7 @@
     "build": "crw-script build",
     "mock": "crw-script mock",
     "stylelint": "stylelint './src/**/index.scss' --fix",
-    "lint": "eslint --c .eslintrc.js --cache --fix",
+    "lint": "eslint -c .eslintrc.js --cache --fix",
     "lintall": "npm run lint && npm run stylelint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

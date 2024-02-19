@@ -2,7 +2,9 @@ const { alias = {} } = require('./crw.config')()
 
 module.exports = {
     root: true,
+    parser: '@babel/eslint-parser',
     parserOptions: {
+        presets: ['@babel/preset-react'],
         ecmaVersion: 11,
         sourceType: 'module',
         allowImportExportEverywhere: true,
@@ -11,6 +13,7 @@ module.exports = {
             globalReturn: true,
         },
     },
+    plugins: ['react', 'react-hooks'],
     extends: ['eslint:recommended', 'eslint-config-skyer'],
     rules: {},
     settings: {
