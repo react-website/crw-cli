@@ -1,11 +1,9 @@
-const path = require('path')
-const ejs = require('ejs')
-const fs = require('fs-extra')
+import path from 'path'
+import fs from 'fs-extra'
+import { createRequire } from 'module'
 
-const d = {
-    functionName: 'PageHeader',
-    styleName: 'page-header',
-}
+const require = createRequire(import.meta.url)
+const ejs = require('ejs')
 
 const getSource = (fileType) => path.resolve(`./template/index.${fileType}.ejs`)
 
@@ -23,7 +21,7 @@ const charToggle = (c, charCode) => {
  * @param suffix
  * @returns {[string,{}]}
  */
-const getData = (str = '', suffix) => {
+const getData = (str, suffix) => {
     if (!/^[A-Za-z]+$/g.test(str)) throw new Error('组件名必须是大写和小写字母, 建议是大驼峰或小驼峰格式!')
 
     let dir = ''
@@ -41,6 +39,8 @@ const getData = (str = '', suffix) => {
         } else {
             dir += l
         }
+
+        i++
     }
 
     return [
