@@ -1,0 +1,20 @@
+{
+  "name": "@react-website/crw-generate-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "qq2575896094",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-website/crw-cli.git",
+    "directory": "packages/crw-generate-template"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "fs-extra": "^11.2.0"
+  }
+}

@@ -38,9 +38,10 @@ const init = () => {
         .action((projectName) => create(projectName, version))
 
     // gen command
-    program.command('gen <project-name>')
+    program.command('gen')
+        .arguments('<comp-type> <comp-name>')
         .description(`Generate a project file template by ${name}`)
-        .action(generate)
+        .action((compType, compName) => generate(compType, compName))
 
     program.parse(process.argv)
 }
