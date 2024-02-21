@@ -48,11 +48,12 @@ const getData = (compName, compType) => {
     })
 
     return [
-        `${compType}/${dir}`,
+        `${dirMap[compType]}/${dir}`,
         {
             funName,
             styleName: `${dir}-${compType}`,
         },
+        dir,
     ]
 }
 
@@ -62,20 +63,31 @@ const renderJsx = async (data) => await renderFile(getSource('jsx'), data)
 
 const renderScss = async (data) => await renderFile(getSource('scss'), data)
 
+const renderRouter = async (data) => {
+    const tmpPath = require.resolve('./template/router.jsx.ejs')
+    return await renderFile(tmpPath, data)
+}
+
 export default async (baseDir, compType, compName) => {
     if (!fs.pathExistsSync(path.resolve(baseDir, 'src')) || !fs.pathExistsSync(path.resolve(baseDir, 'package.json'))) {
         throw new Error('请在项目根目录下执行此命令!')
     }
 
-    const basePath = path.resolve(baseDir, 'src', dirMap[compType])
+    const basePath = path.resolve(baseDir, 'src')
 
-    const [dir, data] = getData(compName, compType)
+    const [dir, data, oriDir] = getData(compName, compType)
 
     const jsx = await renderJsx(data)
     const scss = await renderScss(data)
 
     const jsxTarget = getTarget(basePath, dir, 'jsx')
     const scssTarget = getTarget(basePath, `${dir}/scss`, 'scss')
+
+    if (compType === 'page') {
+        const router = await renderRouter({ ...data, oriDir })
+        const routerTarget = path.resolve(basePath, 'routers/routes', `${oriDir}.jsx`)
+        fs.outputFileSync(routerTarget, router)
+    }
 
     fs.outputFileSync(jsxTarget, jsx)
     fs.outputFileSync(scssTarget, scss)
