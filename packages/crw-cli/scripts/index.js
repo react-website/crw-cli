@@ -1,4 +1,4 @@
-import { Command } from 'commander'
+import { Command, Argument } from 'commander'
 import chalk from 'chalk'
 import figlet from 'figlet'
 import { resolve, dirname } from 'path'
@@ -39,7 +39,8 @@ const init = () => {
 
     // gen command
     program.command('gen')
-        .arguments('<comp-type> <comp-name>')
+        .addArgument(new Argument('<comp-type>', 'template type').choices(['comp', 'page']))
+        .argument('<comp-name>', 'template name')
         .description(`Generate a project file template by ${name}`)
         .action((compType, compName) => generate(compType, compName))
 
