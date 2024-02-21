@@ -84,8 +84,10 @@ export default async (baseDir, compType, compName) => {
     const scssTarget = getTarget(basePath, `${dir}/scss`, 'scss')
 
     if (compType === 'page') {
-        const router = await renderRouter({ ...data, oriDir })
-        const routerTarget = path.resolve(basePath, 'routers/routes', `${oriDir}.jsx`)
+        const routerBasePath = path.resolve(basePath, 'routers/routes')
+        const files = fs.readdirSync(routerBasePath)
+        const router = await renderRouter({ ...data, oriDir, menuIndex: files.length + 1 })
+        const routerTarget = path.resolve(routerBasePath, `${oriDir}.jsx`)
         fs.outputFileSync(routerTarget, router)
     }
 
