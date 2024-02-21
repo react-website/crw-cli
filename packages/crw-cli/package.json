@@ -1,6 +1,6 @@
 {
   "name": "@react-website/crw-cli",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "index.js",
   "bin": {
     "crw": "bin/www"
@@ -25,7 +25,7 @@
   "homepage": "https://github.com/react-website/crw-cli#readme",
   "description": "react website project scaffold.",
   "dependencies": {
-    "@react-website/crw-generate-template": "^1.1.0",
+    "@react-website/crw-generate-template": "^1.1.1",
     "@react-website/crw-utils": "^1.2.6-alpha.0",
     "axios": "^1.6.7",
     "chalk": "^5.3.0",
