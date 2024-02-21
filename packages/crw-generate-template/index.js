@@ -10,7 +10,7 @@ const dirMap = {
     page: 'pages',
 }
 
-const getSource = (fileType) => path.resolve(`./template/index.${fileType}.ejs`)
+const getSource = (fileType) => require.resolve(`./template/index.${fileType}.ejs`)
 
 const getTarget = (baseDir, dir, fileType) => path.resolve(baseDir, dir, `index.${fileType}`)
 
