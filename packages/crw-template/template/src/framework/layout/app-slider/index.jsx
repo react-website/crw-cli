@@ -5,6 +5,7 @@ import { Layout } from 'antd'
 import classNames from 'classnames'
 import { updateCollapsedAppSlider } from '@framework/reducer'
 import AppMenu from '@components/app-menu'
+import CustomIcon from '@components/custom-icon'
 
 import './scss/index.scss'
 
@@ -15,8 +16,8 @@ function AppSlider({
     const dispatch = useDispatch()
 
     const setCollapsed = useCallback(() => {
-        dispatch(updateCollapsedAppSlider(false))
-    }, [dispatch])
+        dispatch(updateCollapsedAppSlider(!collapsedAppSlider))
+    }, [dispatch, collapsedAppSlider])
 
     return (
         <Layout.Sider
@@ -27,11 +28,17 @@ function AppSlider({
         >
             <header className={classNames('app-slider-header', { collapsed: collapsedAppSlider })}>
                 <i className="logo" />
-                <span>{systemName}</span>
             </header>
             <main className="app-slider-main">
                 <AppMenu />
             </main>
+            <div className="slider-toggle-btn">
+                <CustomIcon
+                    type="icon-xiangshang"
+                    className={classNames({'icon-open': collapsedAppSlider })}
+                    onClick={setCollapsed}
+                />
+            </div>
         </Layout.Sider>
     )
 }

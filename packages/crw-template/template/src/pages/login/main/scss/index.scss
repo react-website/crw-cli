@@ -19,11 +19,10 @@
         .container {
             position: relative;
             width: 100%;
-            max-width: var(--max-width);
-            height: var(--max-height);
+            max-width: 758px;
+            height: 420px;
             overflow: hidden;
-            background-color: var(--white);
-            border-radius: var(--button-radius);
+            border-radius: 0.7rem;
             box-shadow: 0 0.9rem 1.7rem #bfbfbf,
       0 0.7rem 0.7rem #c6c6c6;
 

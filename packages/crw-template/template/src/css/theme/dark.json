@@ -1,7 +1,19 @@
 {
   "token": {
-    "colorPrimary": "#2F54EB",
+    "colorPrimary": "#e69c37",
     "colorTextBase": "#2e323c",
-    "borderRadius": 4
+    "borderRadius": 4,
+    "layoutHeaderHeight": "48px",
+    "headerBgColor": "#fff"
+  },
+  "components": {
+    "Layout": {
+      "siderBg": "var(--crw-color-white)"
+    },
+    "Menu": {
+      "itemSelectedBg": "rgba(230, 156, 55, 0.2)",
+      "itemHoverBg": "rgba(230, 156, 55, 0.2)",
+      "itemActiveBg": "rgba(230, 156, 55, 0.2)"
+    }
   }
 }

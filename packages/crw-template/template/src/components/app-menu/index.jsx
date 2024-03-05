@@ -63,6 +63,7 @@ function AppMenu() {
         <div styleName="app-menu-comp">
             <Menu
                 mode="inline"
+                theme="dark"
                 onClick={handleClick}
                 defaultSelectedKeys={location.pathname}
                 items={menuItems}

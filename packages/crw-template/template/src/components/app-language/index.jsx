@@ -26,6 +26,7 @@ function AppLanguage() {
     })), [])
 
     const handleClick = ({ key }) => {
+        debugger
         dispatch(updateLanguage(key))
     }
 
@@ -38,7 +39,6 @@ function AppLanguage() {
                     onClick: handleClick
                 }}
                 placement="bottom"
-                arrow
             >
                 <div className="language-dropdown">
                     <CustomIcon type={languageIconMap[appLanguage]} />

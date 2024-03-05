@@ -1,9 +1,31 @@
 {
   "token": {
-    "colorPrimary": "#1a8e5f",
+    "colorPrimary": "#e69c37",
     "colorTextBase": "#2e323c",
-    "borderRadius": 4,
-    "layoutHeaderHeight": "48",
-    "headerBgColor": "#fff"
+    "borderRadius": "4",
+    "layoutHeaderHeight": "48px",
+    "controlItemBgActive": "rgba(230, 156, 55, 0.3)",
+    "controlItemBgActiveHover": "rgba(230, 156, 55, 0.2)",
+    "controlItemBgHover": "rgba(230, 156, 55, 0.2)"
+  },
+  "components": {
+    "Layout": {
+      "headerBg": "var(--crw-color-white)",
+      "siderBg": "var(--crw-color-white)"
+    },
+    "Menu": {
+      "darkItemBg": "var(--crw-color-white)",
+      "itemColor": "rgba(0, 0, 0, 0.88)",
+      "darkItemColor": "rgba(0, 0, 0, 0.88)",
+      "darkSubMenuItemBg": "var(--crw-color-white)",
+      "itemSelectedBg": "rgba(230, 156, 55, 0.3)",
+      "darkItemSelectedColor": "var(--crw-color-primary)",
+      "darkItemSelectedBg": "rgba(230, 156, 55, 0.3)",
+      "itemHoverBg": "rgba(230, 156, 55, 0.2)",
+      "darkItemHoverColor": "var(--crw-color-primary)",
+      "darkItemHoverBg": "rgba(230, 156, 55, 0.2)",
+      "darkPopupBg": "var(--crw-color-white)",
+      "itemActiveBg": "rgba(230, 156, 55, 0.2)"
+    }
   }
 }

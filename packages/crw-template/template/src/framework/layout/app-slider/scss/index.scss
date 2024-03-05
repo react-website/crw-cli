@@ -1,7 +1,5 @@
 .app-slider {
     height: 100%;
-    overflow: hidden;
-    background: #262b31 !important;
 
     :global {
         .ant-layout-sider-children {
@@ -13,15 +11,13 @@
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                height: 3rem;
+                height: 49px;
                 font-size: 1.5rem;
-                color: #ffffff;
-                border-bottom: 1px solid #262b31;
+                border-bottom: 1px solid #e4e9f1;
 
                 .logo {
-                    width: 1.5rem;
-                    height: 1.5rem;
-                    margin-right: 0.75rem;
+                    width: 152px;
+                    height: 43.53px;
                     background: url("../images/logo.png") center center no-repeat;
                     background-size: 100% 100%;
                 }
@@ -49,6 +45,30 @@
                 color: #ffffff;
                 text-align: center;
                 border-top: 1px solid #e4e9f1;
+            }
+        }
+
+        .slider-toggle-btn {
+            position: absolute;
+            top: 72px;
+            left: 100%;
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            text-align: center;
+            cursor: pointer;
+            background: #f5f5f5;
+            border: 1px solid var(--crw-color-primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+
+            .anticon {
+                color: var(--crw-color-primary);
+                transform: rotate(-90deg);
+
+                &.icon-open {
+                    transform: rotate(90deg);
+                }
             }
         }
     }

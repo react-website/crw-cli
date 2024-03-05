@@ -9,14 +9,13 @@
         .ant-dropdown-trigger {
             display: flex;
             align-items: center;
+            line-height: 2.57rem;
+            cursor: pointer;
 
             .anticon {
+                margin: 0.8rem 0;
                 font-size: 18px;
             }
-        }
-
-        .language-dropdown {
-            cursor: pointer;
         }
     }
 }

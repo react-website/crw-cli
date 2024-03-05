@@ -52,7 +52,6 @@ function AppTheme() {
                     onClick: handleClick
                 }}
                 placement="bottom"
-                arrow
             >
                 <div className="theme-dropdown">
                     {appTheme}
