@@ -1,83 +1,7 @@
 import React from 'react'
-import { createBrowserRouter, redirect, Navigate } from 'react-router-dom'
-import Login from '@pages/login/main'
-import AppRoot from '@framework/layout/app-root'
-import AppLayout from '@framework/layout/app-layout'
-
-import ServerError from '@components/server-error'
-import NotFound from '@components/not-found'
-
-/**
- * caseSensitive?: 区分大小写
- *
- * path?: 路径
- *
- * id?: 唯一标识
- *
- *     loader?: 进入页面加载
- *
- *     action?: AgnosticIndexRouteObject["action"];
- *
- *     hasErrorBoundary?: AgnosticIndexRouteObject["hasErrorBoundary"];
- *
- *     shouldRevalidate?: AgnosticIndexRouteObject["shouldRevalidate"];
- *
- *     handle?: AgnosticIndexRouteObject["handle"];
- *
- *     index: true; // 进入首先加载子页面
- *
- *     children?: // 子路由
- *
- *     element?: // 渲染组件
- *
- *     hydrateFallbackElement?: React.ReactNode | null;
- *
- *     errorElement?: React.ReactNode | null;
- *
- *     Component?: // 渲染组件
- *
- *     HydrateFallback?: React.ComponentType | null;
- *
- *     ErrorBoundary?: React.ComponentType | null;
- *
- *     lazy?: // 懒加载组件
- */
-
-// 合成路径
-const mergePath = (path, baseUrl = '/app') => (path.startsWith('/') ? `${baseUrl}${path}` : `${baseUrl}/${path}`)
-
-// 添加默认路由
-const addIndexRoute = (routes, baseUrl) => {
-    const routeItems = []
-
-    routes.forEach((item) => {
-        const {
-            index,
-            path,
-            children,
-            ...other
-        } = item
-
-        let route = { path, children, ...other }
-
-        const url = mergePath(path, baseUrl)
-
-        if (children && children.length > 0) {
-            route = {
-                ...route,
-                children: addIndexRoute(children, url)
-            }
-        }
-
-        if (index) {
-            routeItems.push({ index: true, element: <Navigate to={url} /> })
-        }
-
-        routeItems.push(route)
-    })
-
-    return routeItems
-}
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+import lazyLoad from '@helper/lazy-load'
+import appLoader from './loader/app-loader'
 
 // 加载路由
 const loadRoutes = () => {
@@ -94,59 +18,44 @@ const loadRoutes = () => {
     return routes
 }
 
-const routes = addIndexRoute(loadRoutes(), '/app')
+const routes = loadRoutes()
 
-const rootRouters = [
+const router = createBrowserRouter([
     {
         id: 'root',
         path: '/',
-        Component: AppRoot,
+        element: lazyLoad(() => import('@framework/layout/app-root')),
         children: [
             {
                 index: true,
-                element: <Navigate to="/login" />,
+                element: <Navigate to="/app" />
             },
             {
-                path: 'login',
-                Component: Login
+                path: '/login',
+                element: lazyLoad(() => import('@pages/login/main'))
             },
             {
-                path: 'app',
-                Component: AppLayout,
+                path: '/app',
+                loader: appLoader,
+                element: lazyLoad(() => import('@framework/layout/app-layout')),
                 children: [
-                    ...routes,
+                    ...routes
                 ]
             },
             {
-                path: '404',
-                Component: NotFound,
-                meta: {
-                    requireAuth: false,
-                    title: '404页面',
-                    key: '404',
-                },
+                path: '/not-found',
+                element: lazyLoad(() => import('@pages/not-found'))
             },
             {
-                path: '500',
-                Component: ServerError,
-                meta: {
-                    requireAuth: false,
-                    title: '500页面',
-                    key: '500',
-                },
-            },
-            {
-                path: 'logout',
-                async action() {
-                    return redirect('/')
-                },
+                path: '*',
+                element: <Navigate to="/not-found" />
             }
         ]
-    },
-    {
-        path: '*',
-        element: <Navigate to="/login" />
     }
-]
+])
 
-export default () => createBrowserRouter(rootRouters)
+if (import.meta.hot) {
+    import.meta.hot.dispose(() => router.dispose())
+}
+
+export default () => router

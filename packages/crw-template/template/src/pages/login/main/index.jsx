@@ -29,7 +29,7 @@ function Login() {
 
     const handleSignIn = (data) => {
         dispatch(loginAction(data)).then((action) => {
-            if (!action.error) navigate('/app')
+            if (!action.error) navigate('/app/goods')
         })
     }
 
@@ -89,13 +89,13 @@ function Login() {
                     <Form
                         name="basic-sign-up"
                         initialValues={{
-                            userType: 'User',
+                            userType: 'User'
                         }}
                         onFinish={handleSignIn}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
-                        <h2 className="system-header">WELCOME</h2>
+                        <h2 className="system-header">TEEA</h2>
                         <Form.Item
                             name="username"
                             rules={[{ required: true, message: 'Please input your username!' }]}

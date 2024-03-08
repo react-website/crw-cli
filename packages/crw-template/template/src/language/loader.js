@@ -6,7 +6,7 @@ import { getBrowserLanguage } from '@helper'
 
 export const LANGUAGES = [
     { value: 'en-US', name: 'English' },
-    { value: 'zh-CN', name: '简体中文' },
+    { value: 'zh-CN', name: '简体中文' }
 ]
 
 i18n.use(initReactI18next)

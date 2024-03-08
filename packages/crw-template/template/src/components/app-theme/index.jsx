@@ -15,15 +15,15 @@ function AppTheme() {
     const menuItems = [
         {
             label: '浅色',
-            key: 'light',
+            key: 'light'
         },
         {
             label: '深色',
-            key: 'dark',
+            key: 'dark'
         },
         {
             label: '跟随系统',
-            key: 'os',
+            key: 'os'
         }
     ]
 

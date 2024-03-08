@@ -27,11 +27,11 @@ const reducers = importAllReducer()
 export default configureStore({
     reducer: combineReducers({
         ...reducers,
-        global: globalReducer,
+        global: globalReducer
     }),
     devTools: !isProd,
     middleware: (getDefaultMiddleware) => {
         if (isProd) return getDefaultMiddleware({ serializableCheck: false })
         return getDefaultMiddleware({ serializableCheck: false }).concat(logger)
-    },
+    }
 })

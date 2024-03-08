@@ -80,8 +80,8 @@ export default async (baseDir, compType, compName) => {
     const jsx = await renderJsx(data)
     const scss = await renderScss(data)
 
-    const jsxTarget = getTarget(basePath, dir, 'jsx')
-    const scssTarget = getTarget(basePath, `${dir}/scss`, 'scss')
+    const jsxTarget = getTarget(basePath, `${dir}/main`, 'jsx')
+    const scssTarget = getTarget(basePath, `${dir}/main/scss`, 'scss')
 
     if (compType === 'page') {
         const routerBasePath = path.resolve(basePath, 'routers/routes')

@@ -5,42 +5,31 @@ import { Layout, Drawer } from 'antd'
 import { getUserInfoAction } from '@pages/login/reducer'
 import PageHeader from '@components/page-header'
 import AppHeader from '../app-header'
-import AppFooter from '../app-footer'
 import AppSlider from '../app-slider'
-import AppSetting from '../app-setting'
 
 import './scss/index.scss'
 
 function AppLayout() {
-    const appSlider = useSelector((state) => state.global.appSlider)
+    const userInfo = useSelector((state) => state.userInfo)
+
     const dispatch = useDispatch()
 
     useEffect(() => { dispatch(getUserInfoAction()) }, [])
 
+    if (!userInfo.username) return null
+
     return (
-        <Layout styleName="app-container">
+        <Layout styleName="app-container" hasSider>
+            <AppSlider systemName="WELCOME" />
             <Layout>
-                <AppSlider systemName="WELCOME" />
-                <Layout>
-                    <AppHeader />
-                    <Layout>
-                        <Layout.Content>
-                            <PageHeader />
-                            <Outlet />
-                        </Layout.Content>
-                        <AppFooter />
-                    </Layout>
-                </Layout>
+                <AppHeader useInfo={userInfo} />
+                <Layout.Content>
+                    <PageHeader />
+                    <div className="page-wrapper">
+                        <Outlet />
+                    </div>
+                </Layout.Content>
             </Layout>
-            <Drawer
-                destroyOnClose
-                open={appSlider}
-                size="458px"
-                footer={false}
-                header="页面配置"
-            >
-                <AppSetting />
-            </Drawer>
         </Layout>
     )
 }

@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react'
-import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Layout } from 'antd'
 import CustomIcon from '@components/custom-icon'
 import UserDropdown from '@components/user-dropdown'
@@ -9,9 +9,9 @@ import { updateCollapsedAppSlider } from '@framework/reducer'
 
 import './scss/index.scss'
 
-function AppHeader() {
-    const userInfo = useSelector((state) => state.userInfo)
-
+function AppHeader({
+    userInfo
+}) {
     return (
         <Layout.Header styleName="app-header">
             <div className="header-menu-wrapper" />
@@ -22,6 +22,17 @@ function AppHeader() {
             </div>
         </Layout.Header>
     )
+}
+
+AppHeader.defaultProps = {
+    userInfo: {}
+}
+
+AppHeader.propTypes = {
+    userInfo: PropTypes.shape({
+        username: PropTypes.string,
+        avatar: PropTypes.string
+    })
 }
 
 export default memo(AppHeader)

@@ -4,7 +4,7 @@ import { getBrowserLanguage } from '@helper'
 const initialState = {
     appLanguage: getBrowserLanguage(), // 当前系统语言
     appTheme: 'light', // 当前系统主题
-    collapsedAppSlider: false, // 侧边栏是否折叠
+    collapsedAppSlider: false // 侧边栏是否折叠
 }
 
 const reducers = {
@@ -15,7 +15,7 @@ const reducers = {
      */
     updateTheme: (state, action) => ({
         ...state,
-        appTheme: action.payload,
+        appTheme: action.payload
     }),
 
     /**
@@ -25,7 +25,7 @@ const reducers = {
      */
     updateLanguage: (state, action) => ({
         ...state,
-        appLanguage: action.payload,
+        appLanguage: action.payload
     }),
     /**
      * 更新系统侧边栏
@@ -42,7 +42,7 @@ const reducers = {
 export const globalSlice = createSlice({
     name: 'global',
     initialState,
-    reducers,
+    reducers
 })
 
 export const {

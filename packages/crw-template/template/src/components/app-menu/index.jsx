@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useMatches } from 'react-router-dom'
 import { Menu } from 'antd'
 import { useTranslation } from 'react-i18next'
 import CustomIcon from '../custom-icon'
@@ -19,27 +19,26 @@ const getRoutes = () => {
     return routes
 }
 
-const walk = (routes = [], fn, baseUrl = '/app') => {
+const walk = (fn, routes = []) => {
     let results = []
-    routes.forEach(({ path, meta, children }) => {
-        const {
-            menuIndex,
-            icon,
-            key
-        } = meta
+    routes.forEach(({ path, loader, children }) => {
+        const data = loader && loader()
 
-        if (menuIndex > 0) {
-            const curPath = path.startsWith('/') ? `${baseUrl}${path}` : `${baseUrl}/${path}`
+        if (data && data.menuIndex && data.menuIndex > 0) {
+            const { menuIndex, icon, key, target } = data
+
             const item = {
-                key: curPath,
-                path: curPath,
-                label: fn(`module.${key}`),
+                key: path,
+                path,
+                label: fn(key),
                 icon: <CustomIcon type={icon} />,
-                menuIndex
+                menuIndex,
+                target
             }
 
             if (children && children.length > 0) {
-                item.children = walk(children, fn, curPath)
+                const c = walk(fn, children)
+                item.children = c.length > 0 ? c : null
             }
 
             results.push(item)
@@ -50,14 +49,30 @@ const walk = (routes = [], fn, baseUrl = '/app') => {
 }
 
 function AppMenu() {
+    const [selectedKeys, setSelectedKeys] = React.useState('')
     const navigate = useNavigate()
-    const location = useLocation()
+    const matches = useMatches()
     const { t } = useTranslation()
-    const menuItems = walk(getRoutes(), t)
+    const menuItems = walk(t, getRoutes())
 
-    const handleClick = (e) => {
-        navigate(e.key)
+    const handleClick = ({ item: { props: { target, path }}, key }) => {
+        if (target) {
+            // window.open(path, target, 'popup,left=100,top=100,width=900,height=800')
+            window.open(path, target)
+        } else {
+            setSelectedKeys(key)
+            navigate(key)
+        }
     }
+
+    React.useEffect(() => {
+        const curMatch = matches[matches.length - 1]
+        let activeMenu = curMatch.pathname
+        if (curMatch.data && curMatch.data.activeMenu) {
+            activeMenu = curMatch.data.activeMenu
+        }
+        setSelectedKeys(activeMenu)
+    }, [matches])
 
     return (
         <div styleName="app-menu-comp">
@@ -65,7 +80,7 @@ function AppMenu() {
                 mode="inline"
                 theme="dark"
                 onClick={handleClick}
-                defaultSelectedKeys={location.pathname}
+                selectedKeys={selectedKeys}
                 items={menuItems}
             />
         </div>

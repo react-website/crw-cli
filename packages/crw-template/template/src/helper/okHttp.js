@@ -10,12 +10,12 @@ const instance = axios.create({
     responseType: 'json',
     paramsSerializer(params) {
         return qs.stringify(params, { indices: false })
-    },
+    }
 })
 
 // 请求拦截器
 instance.interceptors.request.use((config) => ({
-    ...config,
+    ...config
     // cancelToken: new axios.CancelToken() // 取消请求
 }), (error) => Promise.reject(error))
 
@@ -58,16 +58,19 @@ const request = (url, {
     headers = {},
     contentType = 'application/json; charset=UTF-8',
     params = {},
-    data = {},
+    data = {}
     // hasLoading = true,
     // extra
 }) => {
+    const token = sessionStorage.getItem('token')
+	
     // 设置请求header
     instance.defaults.headers = {
         ...instance.defaults.headers,
+	    Token: token,
         ...headers,
         'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': contentType,
+        'Content-Type': contentType
     }
 
     const { nUrl, nParams, sParams } = getUrl(url, params)

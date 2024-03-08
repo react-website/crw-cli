@@ -5,13 +5,42 @@ export default {
     login: {
         login: 'Login',
         normal: 'normal',
-        admin: 'admin',
+        admin: 'admin'
 
     },
-    module: {
-        scaffold: 'SCAFFOLD',
-        other: 'OTHER',
-        table: 'TABLE',
-        list: 'LIST'
+    goods: {
+        goods: 'Goods',
+        detail: 'Detail',
+        table: {
+            title: 'Title',
+            price: 'Price',
+            action: 'Action'
+        }
+    },
+    customer: {
+        customer: 'Customer'
+    },
+    order: {
+        order: 'Order',
+        detail: 'Detail',
+        table: {
+            orderId: 'ID',
+            title: 'Title',
+	        attribute: 'Goods Attribute',
+            price: 'Price',
+            count: 'Count',
+            status: 'Status',
+            time: 'Create Time',
+            evaluate: 'Evaluate'
+        }
+    },
+    industry: {
+        industry: 'Industry'
+    },
+    logistics: {
+        logistics: 'Logistics'
+    },
+    servicio: {
+        servicio: 'Service'
     }
 }

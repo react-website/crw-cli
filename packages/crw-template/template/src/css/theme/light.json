@@ -1,6 +1,7 @@
 {
   "token": {
     "colorPrimary": "#e69c37",
+    "colorLink": "#e69c37",
     "colorTextBase": "#2e323c",
     "borderRadius": "4",
     "layoutHeaderHeight": "48px",
@@ -26,6 +27,10 @@
       "darkItemHoverBg": "rgba(230, 156, 55, 0.2)",
       "darkPopupBg": "var(--crw-color-white)",
       "itemActiveBg": "rgba(230, 156, 55, 0.2)"
+    },
+    "Table": {
+      "stickyScrollBarBg": "var(--crw-color-primary)",
+      "stickyScrollBarBorderRadius": "0"
     }
   }
 }

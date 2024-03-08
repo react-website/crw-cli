@@ -1,6 +1,5 @@
 import i18next from 'i18next'
 
-export { default as lazyLoad } from './lazy-load'
 export { default as okHttp } from './okHttp'
 
 // 获取当前浏览器的语言

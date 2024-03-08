@@ -6,7 +6,7 @@ const urlPrefix = '/users'
 // 用户URL
 const urlMap = {
     login: `${urlPrefix}/login`,
-    getUserInfo: `${urlPrefix}/getUserInfo`,
+    getUserInfo: `${urlPrefix}/getUserInfo`
 }
 
 const typePrefix = (url) => `${url}`.slice(1).replaceAll('/', '_').toLowerCase()
@@ -19,7 +19,7 @@ const initialState = {
     phoneNumber: '',
     realName: '',
     gender: '',
-    age: 0,
+    age: 0
 }
 
 // 用户登录
@@ -27,8 +27,8 @@ export const loginAction = createAsyncThunk(
     typePrefix(urlMap.login),
     async (data) => await okHttp(urlMap.login, {
         method: 'POST',
-        data,
-    }),
+        data
+    })
 )
 
 // 获取用户信息
@@ -36,8 +36,8 @@ export const getUserInfoAction = createAsyncThunk(
     typePrefix(urlMap.getUserInfo),
     async (data) => await okHttp(urlMap.getUserInfo, {
         method: 'POST',
-        data,
-    }),
+        data
+    })
 )
 
 const reducers = {
@@ -49,8 +49,8 @@ const reducers = {
 	 */
     updateUserInfo: (state, action) => ({
         ...state,
-        ...action.payload,
-    }),
+        ...action.payload
+    })
 }
 
 export const userInfoSlice = createSlice({
@@ -58,7 +58,10 @@ export const userInfoSlice = createSlice({
     initialState,
     reducers,
     extraReducers: (builder) => {
-        builder.addCase(loginAction.fulfilled, (state, action) => ({ ...state, token: action.payload }))
+        builder.addCase(loginAction.fulfilled, (state, action) => {
+            sessionStorage.setItem('token', action.payload)
+            return { ...state, token: action.payload }
+        })
         builder.addCase(getUserInfoAction.fulfilled, (state, action) => ({ ...state, ...action.payload }))
     }
 })

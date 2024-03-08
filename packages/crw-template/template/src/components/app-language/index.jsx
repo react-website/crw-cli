@@ -26,7 +26,6 @@ function AppLanguage() {
     })), [])
 
     const handleClick = ({ key }) => {
-        debugger
         dispatch(updateLanguage(key))
     }
 

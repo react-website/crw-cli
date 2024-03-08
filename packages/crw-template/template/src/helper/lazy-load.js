@@ -1,7 +1,9 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, lazy } from 'react'
 import Loading from '@components/loading'
 
-function lazyLoad(Component) {
+function LazyLoad(component) {
+    const Component = lazy(component)
+
     return (
         <Suspense fallback={<Loading />}>
             <Component />
@@ -9,4 +11,4 @@ function lazyLoad(Component) {
     )
 }
 
-export default lazyLoad
+export default LazyLoad
