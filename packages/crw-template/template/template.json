@@ -27,7 +27,7 @@
     "redux-logger": "^3.0.6"
   },
   "dependencies": {
-    "@react-website/com-icon": "^1.0.1",
+    "@react-website/com-icon": "^1.1.2",
     "@reduxjs/toolkit": "^2.0.1",
     "antd": "^5.12.8",
     "axios": "^1.6.7",
