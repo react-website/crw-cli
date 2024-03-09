@@ -13,7 +13,7 @@ import {
     Button
 } from 'antd'
 
-import { loginAction } from '../reducer'
+import { loginAction } from '../action'
 
 import './scss/index.scss'
 
@@ -27,10 +27,11 @@ function Login() {
         setIsSignIn(false)
     }
 
-    const handleSignIn = (data) => {
-        dispatch(loginAction(data)).then((action) => {
-            if (!action.error) navigate('/app/goods')
-        })
+    const handleSignIn = async (data) => {
+        const resp = await dispatch(loginAction(data))
+        console.log(resp, 'resp')
+        sessionStorage.setItem('token', resp)
+        navigate('/app/goods')
     }
 
     const signUp = () => setIsSignIn(true)

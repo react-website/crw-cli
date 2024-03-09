@@ -128,8 +128,6 @@ const okHttp = async (url, options) => request(url, options).then((res) => {
         return Promise.reject({ message })
     }
     }
-
-    return data
 }).catch(({ message, response }) => {
     let errMsg = message
     if (response) errMsg = response.statusText
