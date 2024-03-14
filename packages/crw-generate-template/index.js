@@ -83,8 +83,8 @@ export default async (baseDir, compType, compName) => {
     let jsxDirPath = dir
     let scssDirPath = `${dir}/scss`
     if (compType === 'page') {
-        jsxDirPath = `${dir}/main`
-        scssDirPath = `${dir}/main/scss`
+        jsxDirPath = `${dir}/components/main`
+        scssDirPath = `${dir}/components/main/scss`
     }
 
     const jsxTarget = getTarget(basePath, jsxDirPath, 'jsx')

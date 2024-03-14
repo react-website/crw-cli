@@ -12,7 +12,7 @@ import lazyLoad from '@helper/lazy-load'
 const router = [
     {
         path: '/app/<%= oriDir %>',
-        element: lazyLoad(() => import('@pages/<%= oriDir %>/main')),
+        element: lazyLoad(() => import('@pages/<%= oriDir %>/components/main')),
         loader: () => ({
             menuIndex: <%= menuIndex %>,
             key: '<%= oriDir %>.<%= oriDir %>',

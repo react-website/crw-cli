@@ -13,7 +13,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, distPath, appPath) => {
         path: distPath,
         clean: true,
         pathinfo: isDevelopmentEnv,
-        publicPath: isProductionEnv ? './' : '/',
+        publicPath: '/',
         filename,
         chunkFilename,
         // assetModuleFileName: '',
