@@ -9,9 +9,10 @@ import './css/index.scss'
 
 notification.config({
     placement: 'topRight',
+    closeIcon: null,
     top: 50,
-    duration: 3,
-    rtl: true,
+    duration: 2,
+    rtl: false
 })
 
 // <React.StrictMode> 会导致开发环境页面渲染两次

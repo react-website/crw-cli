@@ -63,7 +63,7 @@ const request = (url, {
     // extra
 }) => {
     const token = sessionStorage.getItem('token')
-	
+
     // 设置请求header
     instance.defaults.headers = {
         ...instance.defaults.headers,
@@ -117,6 +117,7 @@ const okHttp = async (url, options) => request(url, options).then((res) => {
         break
     }
     case 401: { // 未登录, 去登录页面
+        sessionStorage.removeItem('token')
         window.location.replace('/')
         break
     }
@@ -128,6 +129,7 @@ const okHttp = async (url, options) => request(url, options).then((res) => {
         return Promise.reject({ message })
     }
     }
+    return res.data
 }).catch(({ message, response }) => {
     let errMsg = message
     if (response) errMsg = response.statusText

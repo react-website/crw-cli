@@ -75,5 +75,18 @@
         visibility: hidden;
     }
 
+    .ant-notification {
+        .ant-notification-notice-wrapper {
+            .ant-notification-notice {
+                display: flex;
+                align-items: center;
+                width: 280px;
+                padding: 16px 12px;
 
+                .ant-notification-notice-message {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
 }

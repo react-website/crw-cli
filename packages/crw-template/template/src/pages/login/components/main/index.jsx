@@ -13,7 +13,7 @@ import {
     Button
 } from 'antd'
 
-import { loginAction } from '../action'
+import { loginAction } from '@pages/action'
 
 import './scss/index.scss'
 
@@ -28,10 +28,10 @@ function Login() {
     }
 
     const handleSignIn = async (data) => {
-        const resp = await dispatch(loginAction(data))
-        console.log(resp, 'resp')
-        sessionStorage.setItem('token', resp)
-        navigate('/app/goods')
+        const action = await dispatch(loginAction(data))
+        if (action.payload)
+        sessionStorage.setItem('token', action.payload)
+        navigate('/appCan you')
     }
 
     const signUp = () => setIsSignIn(true)

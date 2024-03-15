@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: lazyLoad(() => import('@pages/login/main'))
+                element: lazyLoad(() => import('@pages/login/components/main'))
             },
             {
                 path: '/app',
