@@ -29,7 +29,8 @@ let db = {}
 const filePaths = walk(MOCK_DIR)
 
 filePaths.forEach((filePath) => {
-    const prefix = filePath.slice(0, -3).split('/mock/test/')[1]
+    let prefix = filePath.slice(0, -3).split('/mock/test/')[1]
+    prefix = prefix.replaceAll('/', '_')
 
     let curObj = {}
     Object.entries(require(filePath)).forEach(([key, val]) => {
@@ -38,6 +39,7 @@ filePaths.forEach((filePath) => {
             [`${prefix}_${key}`]: val,
         }
     })
+
     db = {
         ...db,
         ...curObj,
