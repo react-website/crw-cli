@@ -34,9 +34,11 @@ filePaths.forEach((filePath) => {
 
     let curObj = {}
     Object.entries(require(filePath)).forEach(([key, val]) => {
+        const u = key.startsWith('?') ? `${prefix}_${key.slice(1)}` : `${prefix}_${key}`
+
         curObj = {
             ...curObj,
-            [`${prefix}_${key}`]: val,
+            [u]: val,
         }
     })
 
@@ -59,7 +61,7 @@ server.use((req, res, next) => {
     // 修改请求路径 ps: /users/login => users_login
     let url = req.url.slice(1)
     url = url.split('/').join('_')
-    req.url = `/${url}`
+    req.url = `/${url.replaceAll('?', '_')}`
 
     next()
 })

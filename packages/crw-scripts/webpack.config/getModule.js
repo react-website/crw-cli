@@ -59,7 +59,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
                 {
                     test: /\.css$/,
                     include: appPath,
-                    exclude: /node_module/,
+                    // exclude: /node_module/,
                     use: getStyleLoader(isProductionEnv, isDevelopmentEnv, appPath, {
                         importLoaders: 1,
                         sourceMap: isProductionEnv,
@@ -72,7 +72,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
                 {
                     test: /\.s[a|c]ss$/,
                     include: appPath,
-                    exclude: /node_module/,
+                    // exclude: /node_module/,
                     use: getStyleLoader(isProductionEnv, isDevelopmentEnv, appPath, {
                         importLoaders: 3,
                         sourceMap: isProductionEnv,

@@ -16,6 +16,7 @@ const getHtmlWebpackPluginOptions = (appHtml) => {
         template: appHtml,
         title: TITLE,
         favicon: 'src/images/favicon.ico',
+        projectConf: '<script src="/static/scripts/project-conf.js"></script>',
         cache: false,
         minify: {
             removeComments: true,
@@ -86,6 +87,10 @@ module.exports = (isProductionEnv, appPath, appHtml, swSrc) => [
             {
                 from: 'docs',
                 to: 'docs',
+            },
+            {
+                from: 'src/project-conf.js',
+                to: 'static/scripts/project-conf.js',
             },
         ],
     }),
