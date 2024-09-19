@@ -49,13 +49,13 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
     },
     rules: [
         {
+            test: /\.(js|jsx|ts|tsx)$/,
+            use: [{ loader: 'babel-loader' }],
+            include: appPath,
+            exclude: /node_module/,
+        },
+        {
             oneOf: [
-                {
-                    test: /\.(js|jsx|ts|tsx)$/,
-                    use: [{ loader: 'babel-loader' }],
-                    include: appPath,
-                    exclude: /node_module/,
-                },
                 {
                     test: /\.css$/,
                     include: appPath,
