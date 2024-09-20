@@ -29,8 +29,7 @@ const install = async ({
     spinner.succeed()
 
     // 拷贝模版
-    copyTemplate(template, appPath)
-
+    await copyTemplate(template, appPath)
     // 判断模版是否存在template.json文件
     const templateJsonPath = path.join(appPath, 'template.json')
     if (hasTemplateJson(templateJsonPath)) {
