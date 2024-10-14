@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react'
 import { Layout } from 'antd'
-import { useAppDispatch, useAppSelector, classNames } from '@helper'
+import { useAppDispatch, useAppSelector, classNames } from '@/helper'
 import { updateCollapsedAppSlider } from '@/framework/reducer'
 import AppMenu from '@/components/app-menu'
 

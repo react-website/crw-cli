@@ -1,6 +1,6 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import { getBrowserLanguage } from '@helper'
+import { getBrowserLanguage } from '@/helper'
 import enUS from '@/language/en-US'
 import zhCN from '@/language/zh-CN'
 

@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react'
 import { Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
-import { useAppDispatch, useAppSelector } from '@helper'
+import { useAppDispatch, useAppSelector } from '@/helper'
 import { updateTheme } from '@/framework/reducer'
 
 import './scss/index.scss'

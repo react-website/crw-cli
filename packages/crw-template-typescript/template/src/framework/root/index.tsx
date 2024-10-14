@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom'
 import { ConfigProvider, theme } from 'antd'
 import { StyleProvider, px2remTransformer } from '@ant-design/cssinjs'
 import { I18nextProvider } from 'react-i18next'
-import { useAppSelector } from '@helper'
+import { useAppSelector } from '@/helper'
 import getRouter from '@/routers'
 import i18n from '@/language/loader'
 

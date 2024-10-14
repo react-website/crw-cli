@@ -3,7 +3,7 @@ import { Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
 import CustomIcon from '@/components/custom-icon'
 import { updateLanguage } from '@/framework/reducer'
-import { useAppSelector, useAppDispatch } from '@helper'
+import { useAppSelector, useAppDispatch } from '@/helper'
 import { LANGUAGES } from '@/conf/constant'
 import { LanguageType } from '@/models/common'
 

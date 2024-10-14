@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getBrowserLanguage } from '@helper'
+import { getBrowserLanguage } from '@/helper'
 import { LanguageType } from '@/models/common'
 
 interface GlobalState {
