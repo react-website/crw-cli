@@ -1,33 +1,38 @@
-import React, { memo } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Dropdown, Menu } from 'antd'
-import CustomIcon from '@components/custom-icon'
-import { updateLanguage } from '@framework/reducer'
-import { LANGUAGES } from '@/language/loader'
+import React, { memo, useMemo } from 'react'
+import { Dropdown } from 'antd'
+import type { MenuProps } from 'antd'
+import CustomIcon from '@/components/custom-icon'
+import { updateLanguage } from '@/framework/reducer'
+import { useAppSelector, useAppDispatch } from '@helper'
+import { LANGUAGES } from '@/conf/constant'
+import { LanguageType } from '@/models/common'
 
 import './scss/index.scss'
 
-const languageIconMap = {
-    'en-US': 'icon-zhongyingwenyingwen',
-    'zh-CN': 'icon-a-zhongyingwenzhongwen'
-}
-
 function AppLanguage() {
-    const appLanguage = useSelector((state) => state.global.appLanguage)
-    const dispatch = useDispatch()
+    const appLanguage = useAppSelector((state) => state.global.appLanguage)
+    const dispatch = useAppDispatch()
 
-    const menuItems = React.useMemo(() => LANGUAGES.map(({
+    const handleClick: MenuProps['onClick'] = ({ key }) => {
+        dispatch(updateLanguage(key as LanguageType))
+    }
+
+    const menuItems = useMemo(() => LANGUAGES.map(({
         name,
-        value
+        value,
+        icon
     }) => ({
         label: name,
         key: value,
-        icon: <CustomIcon type={languageIconMap[value]} />
+        icon: <CustomIcon type={icon} />
     })), [])
 
-    const handleClick = ({ key }) => {
-        dispatch(updateLanguage(key))
-    }
+
+    const curIcon = useMemo(() => {
+        const item = LANGUAGES.find(item => item.value === appLanguage)
+        return item?.icon
+    }, [appLanguage])
+
 
     return (
         <div styleName="language-dropdown-comp">
@@ -41,7 +46,7 @@ function AppLanguage() {
                 arrow
             >
                 <div className="language-dropdown">
-                    <CustomIcon type={languageIconMap[appLanguage]} />
+                    <CustomIcon type={curIcon!} />
                 </div>
             </Dropdown>
         </div>

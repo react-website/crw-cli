@@ -1,13 +1,8 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
+import { getBrowserLanguage } from '@helper'
 import enUS from '@/language/en-US'
 import zhCN from '@/language/zh-CN'
-import { getBrowserLanguage } from '@helper'
-
-export const LANGUAGES = [
-    { value: 'en-US', name: 'English' },
-    { value: 'zh-CN', name: '简体中文' },
-]
 
 i18n.use(initReactI18next)
     .init({

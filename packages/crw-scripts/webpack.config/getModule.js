@@ -1,6 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { getProjectConf } = require('../crw-utils')
 
-const { IMAGE_INLINE_SIZE_LIMIT = 1000 } = process.env
+const {
+    imageInlineSizeLimit = 1000,
+} = getProjectConf()
 
 const getStyleLoader = (isProductionEnv, isDevelopmentEnv, appPath, cssOptions, preLoader) => {
     const loaders = []
@@ -100,7 +103,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
                     type: 'asset',
                     parser: {
                         dataUrlCondition: {
-                            maxSize: IMAGE_INLINE_SIZE_LIMIT,
+                            maxSize: imageInlineSizeLimit,
                         },
                     },
                     generator: {
@@ -114,7 +117,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
                     mimetype: 'images/avif',
                     parser: {
                         dataUrlCondition: {
-                            maxSize: IMAGE_INLINE_SIZE_LIMIT,
+                            maxSize: imageInlineSizeLimit,
                         },
                     },
                 },

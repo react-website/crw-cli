@@ -1,70 +1,72 @@
-import React, { memo } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { Menu } from 'antd'
-import { useTranslation } from 'react-i18next'
-import CustomIcon from '../custom-icon'
+import React, { memo, useEffect, useMemo, useState } from 'react'
+import { useNavigate, useTranslation, useMatches } from '@/helper'
+import { Menu, MenuProps } from 'antd'
+import { getAppRoute } from '@/routers'
+import CustomIcon from '@/components/custom-icon'
+import { AppLoaderFunction, RouteObject, TFunction } from '@/models/common'
 
 import './scss/index.scss'
 
-const getRoutes = () => {
-    const routes = []
-    const routeContext = require.context('@/routers/routes', false, /\.js(x)$/)
+const walk = (routes: RouteObject[] = [], fn:  TFunction, basePaths: string[], roles: string[] = []): any[] => {
+    const results: any[] = []
 
-    routeContext.keys().forEach((key) => {
-        const context = routeContext(key)
-        const route = context.default || context
+    routes.forEach(({ id, path, loader, children }) => {
+        const paths = [...basePaths]
 
-        routes.push(...route)
-    })
-    return routes
-}
+        if (loader && typeof loader === 'function') {
+            const { menuShow, icon, target } = (loader as AppLoaderFunction)()
 
-const walk = (routes = [], fn, baseUrl = '/app') => {
-    let results = []
-    routes.forEach(({ path, meta, children }) => {
-        const {
-            menuIndex,
-            icon,
-            key
-        } = meta
+            if (menuShow) {
+                paths.push(path as string)
 
-        if (menuIndex > 0) {
-            const curPath = path.startsWith('/') ? `${baseUrl}${path}` : `${baseUrl}/${path}`
-            const item = {
-                key: curPath,
-                path: curPath,
-                label: fn(`module.${key}`),
-                icon: <CustomIcon type={icon} />,
-                menuIndex
+                const menuItem: any = {
+                    key: id,
+                    path: paths.join('/'),
+                    label: fn(id as string),
+                    icon: icon ? <CustomIcon type={icon} /> : null,
+                    target,
+                    children: null
+                }
+
+                if (children && children.length > 0) {
+                    const subMenus = walk(children, fn, paths, roles)
+                    if (subMenus.length > 0) menuItem.children = subMenus
+                }
+
+                if (!roles.includes(id as string)) results.push(menuItem)
             }
-
-            if (children && children.length > 0) {
-                item.children = walk(children, fn, curPath)
-            }
-
-            results.push(item)
         }
     })
-    results = results.sort((a, b) => a.menuIndex - b.menuIndex).map(({ menuIndex, ...item }) => (item))
+
     return results
 }
 
 function AppMenu() {
+    const [selectedKeys, setSelectedKeys] = useState<string[]>([])
     const navigate = useNavigate()
-    const location = useLocation()
+    const matches = useMatches()
     const { t } = useTranslation()
-    const menuItems = walk(getRoutes(), t)
 
-    const handleClick = (e) => {
-        navigate(e.key)
+    const handleClick: MenuProps['onClick'] = ({ key, item }) => {
+        setSelectedKeys([key] as string[])
+        navigate((item as unknown as { props: { path: string }}).props.path)
     }
+
+    useEffect(() => {
+        const ids = matches.slice(2).filter(item => item.id).map(item => item.id)
+        setSelectedKeys(ids)
+    }, [])
+
+    const menuItems = useMemo(() => walk(getAppRoute(), t, ['/app']), [])
+    const defaultOpenKeys = useMemo(() => getAppRoute().filter(item => item.id).map(item => item.id), [])
 
     return (
         <div styleName="app-menu-comp">
             <Menu
                 mode="inline"
                 onClick={handleClick}
-                defaultSelectedKeys={location.pathname}
+                selectedKeys={selectedKeys}
+                defaultOpenKeys={defaultOpenKeys}
                 items={menuItems}
             />
         </div>

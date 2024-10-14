@@ -1,14 +1,15 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { Dropdown } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateTheme } from '@framework/reducer'
+import type { MenuProps } from 'antd'
+import { useAppDispatch, useAppSelector } from '@helper'
+import { updateTheme } from '@/framework/reducer'
 
 import './scss/index.scss'
 
 function AppTheme() {
-    const appTheme = useSelector((state) => state.global.appTheme)
-    const [selectKey, setSelectKey] = React.useState(appTheme)
-    const dispatch = useDispatch()
+    const appTheme = useAppSelector((state) => state.global.appTheme)
+    const [selectKey, setSelectKey] = useState(appTheme)
+    const dispatch = useAppDispatch()
 
     const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -32,7 +33,7 @@ function AppTheme() {
         dispatch(updateTheme(isDark ? 'dark' : 'light'))
     }
 
-    const handleClick = ({ key }) => {
+    const handleClick: MenuProps['onClick'] = ({ key }) => {
         setSelectKey(key)
         if (key === 'os') {
             changeTheme()

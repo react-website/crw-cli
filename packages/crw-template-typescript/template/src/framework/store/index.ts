@@ -1,37 +1,23 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
 import globalReducer from '../reducer'
+import userInfo from '@/pages/login/reducer'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-/**
- * 获取系统所有的reducer slice
- * @returns {{}}
- */
-const importAllReducer = () => {
-    const reducers = {}
-    const requireContext = require.context('@pages', true, /([a-zA-Z]+)\/reducer\/index\.ts$/)
-    requireContext.keys().forEach((key) => {
-        const context = requireContext(key)
-
-        const { name, reducer } = context.default
-
-        reducers[name] = reducer
-    })
-
-    return reducers
-}
-
-const reducers = importAllReducer()
-
-export default configureStore({
+const store = configureStore({
     reducer: combineReducers({
-        ...reducers,
         global: globalReducer,
+        userInfo
     }),
     devTools: !isProd,
     middleware: (getDefaultMiddleware) => {
         if (isProd) return getDefaultMiddleware({ serializableCheck: false })
         return getDefaultMiddleware({ serializableCheck: false }).concat(logger)
-    },
+    }
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
+export default store

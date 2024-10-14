@@ -1,10 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getBrowserLanguage } from '@helper'
+import { LanguageType } from '@/models/common'
 
-const initialState = {
+interface GlobalState {
+    appLanguage: LanguageType;
+    appTheme: string;
+    collapsedAppSlider: boolean;
+}
+
+const initialState: GlobalState = {
     appLanguage: getBrowserLanguage(), // 当前系统语言
     appTheme: 'light', // 当前系统主题
-    collapsedAppSlider: false, // 侧边栏是否折叠
+    collapsedAppSlider: false // 侧边栏是否折叠
 }
 
 const reducers = {
@@ -13,9 +20,9 @@ const reducers = {
      * @param state
      * @param action
      */
-    updateTheme: (state, action) => ({
+    updateTheme: (state: GlobalState, action: PayloadAction<string>) => ({
         ...state,
-        appTheme: action.payload,
+        appTheme: action.payload
     }),
 
     /**
@@ -23,17 +30,17 @@ const reducers = {
      * @param state
      * @param action
      */
-    updateLanguage: (state, action) => ({
+    updateLanguage: (state: GlobalState, action: PayloadAction<LanguageType>) => ({
         ...state,
-        appLanguage: action.payload,
+        appLanguage: action.payload
     }),
+
     /**
-     * 更新系统侧边栏
+     * 更新侧边栏显示
      * @param state
      * @param action
-     * @returns {*&{appSlider}}
      */
-    updateCollapsedAppSlider: (state, action) => ({
+    updateCollapsedAppSlider: (state: GlobalState, action: PayloadAction<boolean>) => ({
         ...state,
         collapsedAppSlider: action.payload
     })
@@ -42,7 +49,7 @@ const reducers = {
 export const globalSlice = createSlice({
     name: 'global',
     initialState,
-    reducers,
+    reducers
 })
 
 export const {

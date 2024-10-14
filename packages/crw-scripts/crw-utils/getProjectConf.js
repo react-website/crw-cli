@@ -45,9 +45,6 @@ module.exports = () => {
         }
     }
 
-    const { PORT } = process.env
-    if (PORT) projectConf.port = parseInt(PORT, 10)
-
     return {
         entryPath: resolveModule(resolveApp, 'src/index'),
         appHtml: resolveApp('src/index.html'),

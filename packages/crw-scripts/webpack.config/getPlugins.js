@@ -2,11 +2,16 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const EslintWebpackPlugin = require('eslint-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+// const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
-const Webpackbar = require('webpackbar')
+// const Webpackbar = require('webpackbar')
 const StylelintWebpackPlugin = require('stylelint-webpack-plugin')
+const { getProjectConf } = require('../crw-utils')
+
+const {
+    publicPath = '/',
+} = getProjectConf()
 
 // 获取html-webpack.config-plugin的options
 const getHtmlWebpackPluginOptions = (appHtml) => {
@@ -51,20 +56,20 @@ module.exports = (isProductionEnv, appPath, appHtml, swSrc) => [
         resourceRegExp: /^\.\/locale$/,
         contextRegExp: /moment$/,
     }),
-    new WebpackManifestPlugin({
-        fileName: 'asset-manifest.json',
-        publicPath: '/',
-        generate: (seed, files, entries) => {
-            const manifestFiles = files.reduce((manifest, file) => {
-                manifest[file.name] = file.path
-                return manifest
-            }, seed)
-
-            const entrypoints = entries.main.filter((fileName) => !fileName.endsWith('.map'))
-
-            return { files: manifestFiles, entrypoints }
-        },
-    }),
+    // new WebpackManifestPlugin({
+    //     fileName: 'asset-manifest.json',
+    //     publicPath: '/',
+    //     generate: (seed, files, entries) => {
+    //         const manifestFiles = files.reduce((manifest, file) => {
+    //             manifest[file.name] = file.path
+    //             return manifest
+    //         }, seed)
+    //
+    //         const entrypoints = entries.main.filter((fileName) => !fileName.endsWith('.map'))
+    //
+    //         return { files: manifestFiles, entrypoints }
+    //     },
+    // }),
     // new WorkboxWebpackPlugin.GenerateSW({
     //     swSrc,
     //     dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
@@ -72,7 +77,7 @@ module.exports = (isProductionEnv, appPath, appHtml, swSrc) => [
     //     maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
     // }),
     // webpack compiled bar
-    new Webpackbar(),
+    // new Webpackbar(),
 
     new StylelintWebpackPlugin({
         files: ['src/**/*.scss'],

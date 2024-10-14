@@ -38,7 +38,6 @@ module.exports = (webpackEnv) => {
     const devServerConf = getDevServer(distPath, projectConf)
 
     const webpackBaseConf = {
-        clean: true,
         mode,
         // 在第一个错误出现时抛出失败结果，而不是容忍它。
         bail: isProductionEnv,

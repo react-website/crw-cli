@@ -1,14 +1,19 @@
 import React, { memo } from 'react'
-import PropTypes from 'prop-types'
-import { Dropdown, Avatar, Menu } from 'antd'
-import CustomIcon from '@components/custom-icon'
+import { Dropdown, Avatar } from 'antd'
+import type { MenuProps } from 'antd'
+import CustomIcon from '@/components/custom-icon'
 
 import './scss/index.scss'
+
+interface UserDropdownProps {
+    username: string;
+    avatar: string;
+}
 
 function UserDropdown({
     username,
     avatar,
-}) {
+}: Readonly<UserDropdownProps>) {
     const menuItems = [
         {
             label: '系统设置',
@@ -22,7 +27,7 @@ function UserDropdown({
         },
     ]
 
-    const handleClick = ({ key }) => {
+    const handleClick: MenuProps['onClick'] = ({ key }) => {
         console.log(key, 'userDropdownClick')
     }
 
@@ -46,16 +51,6 @@ function UserDropdown({
             </Dropdown>
         </div>
     )
-}
-
-UserDropdown.defaultProps = {
-    username: '',
-    avatar: '',
-}
-
-UserDropdown.propTypes = {
-    username: PropTypes.string,
-    avatar: PropTypes.string,
 }
 
 export default memo(UserDropdown)

@@ -1,4 +1,9 @@
 const path = require('path')
+const { getProjectConf } = require('../crw-utils')
+
+const {
+    publicPath = '/',
+} = getProjectConf()
 
 // webpack.config output
 module.exports = (isProductionEnv, isDevelopmentEnv, distPath, appPath) => {
@@ -13,7 +18,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, distPath, appPath) => {
         path: distPath,
         clean: true,
         pathinfo: isDevelopmentEnv,
-        publicPath: '/',
+        publicPath,
         filename,
         chunkFilename,
         // assetModuleFileName: '',
