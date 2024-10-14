@@ -61,7 +61,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
             oneOf: [
                 {
                     test: /\.css$/,
-                    include: appPath,
+                    // include: appPath,
                     // exclude: /node_module/,
                     use: getStyleLoader(isProductionEnv, isDevelopmentEnv, appPath, {
                         importLoaders: 1,
@@ -74,7 +74,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
                 },
                 {
                     test: /\.s[a|c]ss$/,
-                    include: appPath,
+                    // include: appPath,
                     // exclude: /node_module/,
                     use: getStyleLoader(isProductionEnv, isDevelopmentEnv, appPath, {
                         importLoaders: 3,
@@ -88,7 +88,7 @@ module.exports = (isProductionEnv, isDevelopmentEnv, appPath) => ({
                 },
                 {
                     test: /\.less$/,
-                    include: appPath,
+                    // include: appPath,
                     use: getStyleLoader(isProductionEnv, isDevelopmentEnv, appPath, {
                         importLoaders: 3,
                         sourceMap: isProductionEnv,
