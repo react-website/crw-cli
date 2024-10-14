@@ -1,6 +1,6 @@
 {
   "name": "@react-website/crw-template-typescript",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This is a ts template.",
   "main": "index.tsx",
   "scripts": {
