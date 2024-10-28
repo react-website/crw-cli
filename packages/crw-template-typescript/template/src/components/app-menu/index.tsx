@@ -14,9 +14,9 @@ const walk = (routes: RouteObject[] = [], fn:  TFunction, basePaths: string[], r
         const paths = [...basePaths]
 
         if (loader && typeof loader === 'function') {
-            const { menuShow, icon, target } = (loader as AppLoaderFunction)()
+            const { menu, icon, target } = (loader as AppLoaderFunction)()
 
-            if (menuShow) {
+            if (menu) {
                 paths.push(path as string)
 
                 const menuItem: any = {
@@ -58,7 +58,10 @@ function AppMenu() {
     }, [])
 
     const menuItems = useMemo(() => walk(getAppRoute(), t, ['/app']), [])
-    const defaultOpenKeys = useMemo(() => getAppRoute().filter(item => item.id).map(item => item.id), [])
+    const defaultOpenKeys = useMemo(() => getAppRoute()
+        .filter(item => item.id)
+        .map(item => item.id) as string[]
+    , [])
 
     return (
         <div styleName="app-menu-comp">

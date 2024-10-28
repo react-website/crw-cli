@@ -25,45 +25,38 @@ const walk = (dir) => {
     return results
 }
 
-let db = {}
+const db = {}
+
 const filePaths = walk(MOCK_DIR)
 
 filePaths.forEach((filePath) => {
-    let prefix = filePath.slice(0, -3).split('/mock/test/')[1]
-    prefix = prefix.replaceAll('/', '_')
+    const prefix = filePath.slice(0, -3).split('/mock/test')[1]
 
-    let curObj = {}
     Object.entries(require(filePath)).forEach(([key, val]) => {
-        const u = key.startsWith('?') ? `${prefix}_${key.slice(1)}` : `${prefix}_${key}`
-
-        curObj = {
-            ...curObj,
-            [u]: val,
-        }
+        const u = key.startsWith('?') ? `${prefix}/${key.slice(1)}` : `${prefix}/${key}`
+        db[u] = val
     })
-
-    db = {
-        ...db,
-        ...curObj,
-    }
 })
 
 const server = jsonServer.create()
-const router = jsonServer.router(db)
+const router = jsonServer.router({})
 const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
-
+server.use(jsonServer.bodyParser)
 server.use((req, res, next) => {
     // 修改请求方式
-    req.method = 'GET'
-
-    // 修改请求路径 ps: /users/login => users_login
-    let url = req.url.slice(1)
-    url = url.split('/').join('_')
-    req.url = `/${url.replaceAll('?', '_')}`
+    req.method = 'POST'
 
     next()
+})
+
+Object.entries(db).forEach(([key, val]) => {
+    server.post(key, async (req, res) => {
+        const result = typeof val === 'function' ? await val(req.body, req.query) : val
+
+        res.jsonp(result)
+    })
 })
 
 server.use(router)

@@ -21,7 +21,6 @@ interface RequestOptions {
 }
 
 const instance: AxiosInstance = axios.create({
-    baseURL: 'http://0.0.0.0:3003',
     timeout: 0,
     method: 'get',
     responseType: 'json',
@@ -34,24 +33,36 @@ const instance: AxiosInstance = axios.create({
 })
 
 // 请求拦截器
-instance.interceptors.request.use((config) => {
-    const token = sessionStorage.getItem('token') as string
-    if (token) config.headers!.Token = token
+instance.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token') as string
+        if (token) config.headers!.Token = token
 
-    return config
-}, (error) => Promise.reject(error))
+        return config
+    },
+    (error) => Promise.reject(error)
+)
 
 // 响应拦截器
 instance.interceptors.response.use(<T>(response: AxiosResponse<Response<T>>) => {
-    const { data: { code, msg, result }, headers } = response
-    if (headers.hasAuthorization || headers.token) {
-        localStorage.setItem('token', (headers.getAuthorization || headers.token) as string)
-    } else {
-        // @ts-expect-error eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        if (result?.token) localStorage.setItem('token', result.token)
-    }
+    const {
+        data: {
+            code,
+            msg,
+            // result
+        },
+        // headers
+    } = response
+    // if (headers.hasAuthorization || headers.token) {
+    //     localStorage.setItem('token', (headers.getAuthorization || headers.token) as string)
+    // } else {
+    //     // @ts-expect-error eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //     if (result?.token) localStorage.setItem('token', result.token)
+    // }
 
     switch (code) {
+        case '8000':
+            break
         case '4011':
         case '4012':
             window.location.replace('/login')
@@ -177,11 +188,11 @@ const request = <T>(url: string, {
     }
 }
 
-const okHttp = async <T>(url: string, options: RequestOptions): Promise<T | undefined> => request<T>(url, options).then(response => {
+const okHttp = async <T>(url: string, options: RequestOptions): Promise<T> => request<T>(url, options).then(response => {
     const { code, msg, result } = response.data
 
     if (code !== '8000') return Promise.reject({ message: msg, code })
-    return result
+    return result as T
 }).catch(({ code, message }) => Promise.reject({ code: `${code}`, message }))
 
 export default okHttp

@@ -9,7 +9,7 @@ const  router = [
     {
         id: 'example',
         path: 'example',
-        loader: appLoader({ menuShow: true }),
+        loader: appLoader({ menu: true }),
         lazy: lazyLoad('example')
     }
 ] satisfies RouteObject[]

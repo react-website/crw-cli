@@ -4,7 +4,7 @@ import { Layout } from 'antd'
 import { getUserInfoAction } from '@/pages/login/action'
 import AppHeader from '@/components/app-header'
 import PageHeader from '@/components/page-header'
-import AppFooter from '@/components/app-footer'
+// import AppFooter from '@/components/app-footer'
 import AppSlider from '@/components/app-slider'
 
 import './scss/index.scss'
@@ -29,11 +29,12 @@ function AppLayout() {
             <Layout>
                 <AppHeader />
                 <Layout>
+                    <PageHeader />
                     <Layout.Content>
-                        <PageHeader />
+
                         <Outlet />
                     </Layout.Content>
-                    <AppFooter />
+                    {/*<AppFooter />*/}
                 </Layout>
             </Layout>
         </Layout>

@@ -33,7 +33,8 @@ export interface Response<T> {
 export type LoginActionType<T> = AsyncThunkAction<any, T, object>;
 
 export interface AppLoaderObject {
-    menuShow: boolean;      // 是否显示在菜单列表
+    menu: boolean;          // 是否显示在菜单列表
+    subHeader: boolean;     // 是否显示二级菜单
     icon?: string;          // 图标
     target?: string;        // 外部地址
 }
