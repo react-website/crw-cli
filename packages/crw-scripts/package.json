@@ -1,6 +1,6 @@
 {
   "name": "@react-website/crw-scripts",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "react website scripts",
   "main": "index.js",
   "bin": {

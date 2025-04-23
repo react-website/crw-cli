@@ -18,5 +18,6 @@ module.exports = ({ alias = {} }) => ({
     ],
     alias: {
         '@': appPath,
+        ...alias,
     },
 })
